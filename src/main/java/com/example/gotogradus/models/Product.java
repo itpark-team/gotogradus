@@ -1,6 +1,7 @@
 package com.example.gotogradus.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Builder
 @Table(name = "products")
@@ -42,7 +44,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category categoryId;
+    private Category category;
 
     @Column(name = "is_active")
     private boolean isActive;

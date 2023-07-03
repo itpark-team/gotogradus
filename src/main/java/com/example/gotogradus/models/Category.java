@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Builder
 @Table(name = "categories")
@@ -19,5 +20,8 @@ public class Category {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "picture_path")
+    private String picturePath;
 
 }
