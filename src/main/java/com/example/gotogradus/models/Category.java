@@ -7,12 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "countries")
+@Table(name = "categories")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Countrie {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
