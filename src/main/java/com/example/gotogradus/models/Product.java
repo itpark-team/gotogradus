@@ -1,6 +1,7 @@
 package com.example.gotogradus.models;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,39 +10,40 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    public int id;
+    private int id;
 
     @Column(name = "name")
-    public String name;
+    private String name;
 
     @Column(name = "volume")
-    public BigDecimal volume;
+    private BigDecimal volume;
 
     @Column(name = "price")
-    public BigDecimal price;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
-    public Country country;
+    private Country country;
 
     @Column(name = "description")
-    public String description;
+    private String description;
 
     @Column(name = "alcohol_percent")
-    public BigDecimal alcoholPercent;
+    private BigDecimal alcoholPercent;
 
     @Column(name = "picture_path")
-    public String picturePath;
+    private String picturePath;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
-    public Category categoryId;
+    private Category categoryId;
 
     @Column(name = "is_active")
-    public boolean isActive;
+    private boolean isActive;
 }
