@@ -7,23 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "categories")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Orders {
-
+public class Categorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "total_price")
-    private int totalPrice;
-
-    @Column(name = "datetime")
-    private String datetime;
 }
