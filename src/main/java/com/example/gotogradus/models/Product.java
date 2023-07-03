@@ -1,4 +1,4 @@
-package com.example.gotogradus.dtos;
+package com.example.gotogradus.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
