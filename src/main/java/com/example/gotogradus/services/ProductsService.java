@@ -5,6 +5,7 @@ import com.example.gotogradus.models.Product;
 import com.example.gotogradus.repositories.ProductsRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ProductsService {
 
     public List<ProductResponseDto> getByCategoryId(int categoryId) {
         List<Product> products = productsRepository.findAllByCategoryIdOrderByIdAsc(categoryId);
-
+        
         return products.stream()
                 .map(product -> modelMapper.map(product, ProductResponseDto.class))
                 .collect(Collectors.toList());
