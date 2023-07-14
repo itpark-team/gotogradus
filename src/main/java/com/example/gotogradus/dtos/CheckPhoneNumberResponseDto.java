@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryResponseDto {
-    private int id;
-    private String name;
-    private String picturePath;
+public class CheckPhoneNumberResponseDto {
+    private String code;
 }

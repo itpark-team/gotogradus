@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryResponseDto {
-    private int id;
+public class RegisterRequestDto {
     private String name;
-    private String picturePath;
+    private String phoneNumber;
 }

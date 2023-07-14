@@ -10,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("products")
 @AllArgsConstructor
-@CrossOrigin
 public class ProductsController {
 
     private ProductsService productsService;
