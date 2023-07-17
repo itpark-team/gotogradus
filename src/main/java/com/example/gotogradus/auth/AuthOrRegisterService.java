@@ -45,14 +45,6 @@ public class AuthOrRegisterService {
 
         User user = usersService.findByPhoneNumber(authRequestDto.getPhoneNumber()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-//
-//        authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        authRequestDto.getPhoneNumber(),
-//                        authRequestDto.getSmsCode()
-//                )
-//        );
-
         String jwtToken = jwtService.generateToken(user);
 
         return AuthOrRegisterResponseDto.builder()
@@ -60,7 +52,7 @@ public class AuthOrRegisterService {
                 .build();
     }
 
-    public boolean checkPhoneNumber(CheckPhoneNumberRequestDto checkPhoneNumberRequestDto) {
-        return usersService.findByPhoneNumber(checkPhoneNumberRequestDto.getPhoneNumber()).isPresent();
+    public boolean checkPhoneNumber(String phoneNumber) {
+        return usersService.findByPhoneNumber(phoneNumber).isPresent();
     }
 }
