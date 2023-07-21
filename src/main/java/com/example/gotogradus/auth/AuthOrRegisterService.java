@@ -7,6 +7,7 @@ import com.example.gotogradus.dtos.RegisterRequestDto;
 import com.example.gotogradus.models.User;
 import com.example.gotogradus.repositories.UsersRepository;
 import com.example.gotogradus.services.UsersService;
+import com.example.gotogradus.utils.RedisUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,8 +20,7 @@ import org.springframework.stereotype.Service;
 public class AuthOrRegisterService {
     private UsersService usersService;
     private JwtService jwtService;
-
-    private AuthenticationManager authenticationManager;
+    private RedisUtil redisUtil;
 
     public AuthOrRegisterResponseDto register(RegisterRequestDto registerRequestDto) {
         User user = User.builder()
@@ -39,7 +39,13 @@ public class AuthOrRegisterService {
 
     public AuthOrRegisterResponseDto authenticate(AuthRequestDto authRequestDto) {
 
-        if (!authRequestDto.getSmsCode().equals("1234")) {
+        String code = redisUtil.get(authRequestDto.getPhoneNumber());
+
+        if (code == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        if (!authRequestDto.getSmsCode().equals(code)) {
             throw new UsernameNotFoundException("User not found");
         }
 

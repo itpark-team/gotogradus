@@ -1,4 +1,4 @@
-package com.example.gotogradus.services;
+package com.example.gotogradus.utils;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class RedisService {
+public class RedisUtil {
     private RedisTemplate<String, String> redisTemplate;
 
-    public void add(String key, String value) {
-        redisTemplate.opsForValue().append(key, value);
+    public void set(String key, String value) {
+        redisTemplate.opsForValue().set(key, value);
     }
 
     public String get(String key) {

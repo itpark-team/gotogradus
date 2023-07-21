@@ -3,7 +3,7 @@ package com.example.gotogradus.controllers;
 import com.example.gotogradus.api.SmsApiWorker;
 import com.example.gotogradus.auth.AuthOrRegisterService;
 import com.example.gotogradus.dtos.*;
-import com.example.gotogradus.services.RedisService;
+import com.example.gotogradus.utils.RedisUtil;
 import com.example.gotogradus.utils.RandomSmsCodeUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatusCode;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private AuthOrRegisterService authOrRegisterService;
     private RandomSmsCodeUtil randomSmsCodeUtil;
-    private RedisService redisService;
+    private RedisUtil redisUtil;
     private SmsApiWorker smsApiWorker;
 
 //    @PostMapping("/register")
@@ -38,8 +38,8 @@ public class AuthController {
         }
 
         String smsCode = randomSmsCodeUtil.getRandomCode();
-        //redisService.add(phoneNumber, smsCode);
-        smsApiWorker.send(phoneNumber, smsCode);
+        redisUtil.set(phoneNumber, smsCode);
+        //smsApiWorker.send(phoneNumber, smsCode);
 
         return new ResponseEntity(HttpStatusCode.valueOf(200));
     }

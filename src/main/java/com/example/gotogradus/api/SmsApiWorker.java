@@ -1,9 +1,11 @@
 package com.example.gotogradus.api;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Collections;
 
 @Service
 @AllArgsConstructor
@@ -13,8 +15,28 @@ public class SmsApiWorker {
 
     public void send(String phoneNumber, String smsCode) {
 
-        String url = String.format("https://smsc.ru/sys/send.php?login=itpark32&psw=itpark32ru&phones=%s&mes=%s", phoneNumber, smsCode);
+        RestTemplate restTemplate = new RestTemplate();
 
-        ResponseEntity<Object> response = restTemplate.getForEntity(url, Object.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "cf04c8b9896e1a43786ee48eb158db4586f95f8c96fb5f53");
+        headers.add("content-type", "application/json");
+
+        phoneNumber = phoneNumber.substring(1);
+
+        String body = String.format("{\n" +
+                "  \"sender\": \"SMS4B-Test\",\n" +
+                "  \"messages\": [\n" +
+                "    {\n" +
+                "      \"number\": \"%s\",\n" +
+                "      \"text\": \"%s\"\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}", phoneNumber, smsCode);
+
+        String url = "https://api.sms4b.ru/v1/sms";
+
+        HttpEntity<String> entity = new HttpEntity<>(body, headers);
+
+        restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
     }
 }
